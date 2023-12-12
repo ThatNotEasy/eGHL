@@ -25,7 +25,7 @@ QUERY = 'QUERY'
 CAPTURE = 'CAPTURE'
 REVERSAL = 'REVERSAL'
 
-def ini_ip():
+def ni_ip_ke():
     response = requests.get('https://httpbin.org/ip')
     data = response.json()
     origin = data.get('origin')
@@ -39,13 +39,13 @@ def tukang_hash():
         + MERCHANT_RETURN
         + AMOUNT
         + CURRENCY_CODE
-        + ini_ip()
+        + ni_ip_ke()
         + TIMEOUT
     )
     generated = hashlib.sha256(meow.encode('utf-8')).hexdigest()
 
     params = {
-        'TransactionType': 'SALE',
+        'TransactionType': SALE,
         'PymtMethod': 'ANY',
         'ServiceID': SERVICE_ID,
         'PaymentID': PAYMENT_ID,
@@ -54,7 +54,7 @@ def tukang_hash():
         'MerchantReturnURL': MERCHANT_RETURN,
         'Amount': AMOUNT,
         'CurrencyCode': CURRENCY_CODE,
-        'CustIP': ini_ip(),
+        'CustIP': ni_ip_ke(),
         'CustName': 'EXAMPLE',
         'CustEmail': 'EXAMPLE',
         'CustPhone': '60123456789',
